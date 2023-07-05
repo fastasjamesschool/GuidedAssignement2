@@ -76,6 +76,34 @@ module.exports.findPlanetFilms = async function(id, callback) {
     }
   }; 
 
+// find films characters 
+module.exports.findFilmCharacters = async function(id, callback) {
+    try{
+        var col = dbPool.collection("films_characters");
+        col.find({film_id: +id}).toArray((err, films_characters) => { 
+            callback(err, films_characters);
+        });
+    }
+    catch (err){
+        console.log("Planet not identified by ID")
+        callback(err, undefined)
+    }
+}; 
+
+// find planets in each film
+module.exports.findFilmPlanets = async function(id, callback) {
+    try{
+        var col = dbPool.collection("films_planets");
+        col.find({film_id: +id}).toArray((err, films_planets) => { 
+            callback(err, films_planets);
+        });
+    }
+    catch (err){
+        console.log("Planet not identified by ID")
+        callback(err, undefined)
+    }
+};
+
 // finding all characters in the collection
 module.exports.findAllCharacters = function(callback) {
     try{
