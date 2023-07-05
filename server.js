@@ -16,7 +16,6 @@ app.get("/api/planets", (req, res) => {
         res.send(planets);
       } else {
         res.statusCode = 501;
-        console.log("Confirmed")
         res.end();
       }
     }); 
@@ -31,7 +30,32 @@ app.get("/api/films", (req, res) => {
         res.send(films);
       } else {
         res.statusCode = 501;
-        console.log("Confirmed")
+        res.end();
+      }
+    }); 
+  });
+  app.get("/api/planets/:id", (req, res) => {
+    dao.findPlanet(req.params.id, (err, planet) => {
+        console.log(planet)
+      if (planet !== undefined) {
+        //We have planets
+        console.log("index.js one planet: " + req.params.id );
+        res.send(planet);
+      } else {
+        res.statusCode = 501;
+        res.end();
+      }
+    }); 
+  });
+  app.get("/api/planets/:id/films", (req, res) => {
+    dao.findPlanetFilms(req.params.id, (err, planets_films) => {
+        console.log(planets_films)
+      if (planets_films !== undefined) {
+        //We have planets
+        console.log("index.js films to planets: " + req.params.id );
+        res.send(planets_films);
+      } else {
+        res.statusCode = 501;
         res.end();
       }
     }); 

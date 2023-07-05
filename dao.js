@@ -34,7 +34,7 @@ module.exports.findPlanet = async function(id, callback) {
     catch (err){
         console.log("Planet not identified by ID")
         callback(err, undefined)
-    }
+    } 
   }; 
 // finding all films in the collection
 module.exports.findAllFilms = function(callback) {
@@ -62,6 +62,19 @@ module.exports.findFilm = async function(id, callback) {
         callback(err, undefined)
     }
 }; 
+
+module.exports.findPlanetFilms = async function(id, callback) {
+    try{
+        var col = dbPool.collection("films_planets");
+        col.find({planet_id: +id}).toArray((err, films_planets) => { 
+            callback(err, films_planets);
+        });
+    }
+    catch (err){
+        console.log("Planet not identified by ID")
+        callback(err, undefined)
+    }
+  }; 
 
 // finding all characters in the collection
 module.exports.findAllCharacters = function(callback) {
