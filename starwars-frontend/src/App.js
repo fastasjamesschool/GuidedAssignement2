@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
+import Home from './home.js'
 
 
 function App() {
@@ -17,17 +18,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Star Wars Universe Lookup</h1>
-        <section id="charactersList">
-          {characters.map(
-            (characters, index) => {
-              return <div key ={index} >
-                {characters.name}
-              </div>
-            }
-
-          )}
-
-        </section>
+        <Home />
       </header>
     </div>
   );
