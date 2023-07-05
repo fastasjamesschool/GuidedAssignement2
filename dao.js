@@ -102,3 +102,28 @@ module.exports.findCharacter = async function(id, callback) {
         callback(err, undefined)
     }
 }; 
+
+module.exports.findCharactersFromPlanets = async function(id, callback) {
+    try{
+        var col = dbPool.collection("characters");
+        const character = await col.findOne({id: +id})
+        callback(undefined, character)
+    }
+    catch (err){
+        console.log("Film not identified by ID")
+        callback(err, undefined)
+    }
+};
+
+module.exports.findFilmsCharacterIn = async function(id, callback) {
+    try{
+        var col = dbPool.collection("films_characters");
+        col.find({character_id: +id}).toArray((err, characters) => { 
+            callback(err, characters);
+        });
+    }
+    catch (err){
+        console.log("Character not identified by ID")
+        callback(err, undefined)
+    }
+};

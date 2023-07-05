@@ -104,6 +104,35 @@ app.get("/api/characters/:id", (req, res) => {
       }
     }); 
   });
+app.get("/api/planets/:id/characters", (req, res) => {
+    dao.findCharactersFromPlanet(req.params.id, (err, characters) => {
+        console.log(characters)
+      if (characters !== undefined) {
+        //We have planets
+        console.log("index.js one character: " + req.params.id );
+        res.send(characters);
+      } else {
+        res.statusCode = 501;
+        console.log("Confirmed")
+        res.end();
+      }
+    }); 
+  });
+app.get("/api/characters/:id/films", (req, res) => {
+    dao.findFilmsCharacterIn(req.params.id, (err, films) => {
+        console.log(films)
+      if (films !== undefined) {
+        //We have planets
+        console.log("index.js one character: " + req.params.id );
+        res.send(films);
+      } else {
+        res.statusCode = 501;
+        console.log("Confirmed")
+        res.end();
+      }
+    }); 
+  });
+
 
 
 const port = 4000
