@@ -61,6 +61,35 @@ app.get("/api/films", (req, res) => {
     }); 
   });
 
+  // films/:id/characters - show films_characters 
+  app.get("/api/films/:id/characters", (req, res) => {
+    dao.findFilmCharacters(req.params.id, (err, films_characters) => {
+        console.log(films_characters)
+      if (films_characters !== undefined) {
+        //We have characters
+        console.log("index.js characters to film: " + req.params.id );
+        res.send(films_characters);
+      } else {
+        res.statusCode = 501;
+        res.end();
+      }
+    }); 
+  });
+  // films:/id/planets
+  app.get("/api/films/:id/planets", (req, res) => {
+    dao.findFilmPlanets(req.params.id, (err, films_planets) => {
+        console.log(films_planets)
+      if (films_planets !== undefined) {
+        //We have characters
+        console.log("index.js films to characters: " + req.params.id );
+        res.send(films_planets);
+      } else {
+        res.statusCode = 501;
+        res.end();
+      }
+    }); 
+  });
+
 app.get("/api/films/:id", (req, res) => {
     dao.findFilm(req.params.id, (err, film) => {
         console.log(film)
