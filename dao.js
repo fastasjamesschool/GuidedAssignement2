@@ -2,6 +2,7 @@ const mongodb = require("mongodb"); // mongo client library
 const url = "mongodb://localhost:27017/swapi";
 let dbPool; // database connection
 
+mongodb.MongoClient.connect(url, function(err, db) {
 if (!err) 
 {dbPool = db.db("swapi");
 } 
@@ -13,3 +14,4 @@ module.exports.findAllPlanets = function(callback) {
     data = 'response from findPlanets'
     callback(data) 
   }  
+})
