@@ -35,5 +35,17 @@ module.exports.findPlanet = async function(id, callback) {
         console.log("Planet not identified by ID")
         callback(err, undefined)
     }
-  }; 
+  };
+module.exports.findPlanetFilms = async function(id, callback) {
+    try{
+        var col = dbPool.collection("films_planets");
+        col.find({planet_id: +id}).toArray((err, films_planets) => { 
+            callback(err, films_planets);
+        });
+    }
+    catch (err){
+        console.log("Planet not identified by ID")
+        callback(err, undefined)
+    }
+  };  
 
