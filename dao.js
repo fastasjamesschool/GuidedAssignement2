@@ -12,21 +12,28 @@ else
 });
 // retrieve all planets James and Michelle Trademarked
 module.exports.findAllPlanets = function(callback) {
-    var col = dbPool.collection("planets");
-    console.log("test1")
-    col.find().toArray((err, data) => {
-        console.log("test2") 
-        console.log(data) 
-        callback(err, data);
-    });
+    try{
+        var col = dbPool.collection("planets");
+        console.log("test1")
+        col.find().toArray((err, planets) => { 
+            callback(err, planets);
+        });
+    }
+    catch (err){
+        callback(err, undefined);
+    }
+    
   }; 
-module.exports.findPlanet = function(id, callback) {
-    var col = dbPool.collection("planets");
-    console.log("test1")
-    col.find({id: id}).toArray((err, data) => {
-        console.log("test2") 
-        console.log(data) 
-        callback(err, data);
-    });
+// We are looking to find a specific planet using the Id that is provided in the url
+module.exports.findPlanet = async function(id, callback) {
+    try{
+        var col = dbPool.collection("planets");
+        const planet = await col.findOne({id: +id})
+        callback(undefined, planet)
+    }
+    catch (err){
+        console.log("Planet not identified by ID")
+        callback(err, undefined)
+    }
   }; 
 
