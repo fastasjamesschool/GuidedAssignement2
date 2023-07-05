@@ -36,4 +36,56 @@ module.exports.findPlanet = async function(id, callback) {
         callback(err, undefined)
     }
   }; 
+// finding all films in the collection
+module.exports.findAllFilms = function(callback) {
+    try{
+        var col = dbPool.collection("films");
+        console.log("test1")
+        col.find().toArray((err, films) => { 
+            callback(err, films);
+        });
+    }
+    catch (err){
+        callback(err, undefined);
+    }
+    
+}; 
+// finding a film based on the Id
+module.exports.findFilm = async function(id, callback) {
+    try{
+        var col = dbPool.collection("films");
+        const film = await col.findOne({id: +id})
+        callback(undefined, film)
+    }
+    catch (err){
+        console.log("Film not identified by ID")
+        callback(err, undefined)
+    }
+}; 
 
+// finding all characters in the collection
+module.exports.findAllCharacters = function(callback) {
+    try{
+        var col = dbPool.collection("characters");
+        console.log("test1")
+        col.find().toArray((err, characters) => { 
+            callback(err, characters);
+        });
+    }
+    catch (err){
+        callback(err, undefined);
+    }
+    
+}; 
+// finding a character based on the Id
+module.exports.findCharacter = async function(id, callback) {
+    try{
+        var col = dbPool.collection("characters");
+        const character = await col.findOne({id: +id})
+        callback(undefined, character)
+    }
+    catch (err){
+        console.log("Film not identified by ID")
+        callback(err, undefined)
+    }
+}; 
