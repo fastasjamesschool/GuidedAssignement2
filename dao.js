@@ -20,3 +20,13 @@ module.exports.findAllPlanets = function(callback) {
         callback(err, data);
     });
   }; 
+module.exports.findPlanet = function(id, callback) {
+    var col = dbPool.collection("planets");
+    console.log("test1")
+    col.find({id: id}).toArray((err, data) => {
+        console.log("test2") 
+        console.log(data) 
+        callback(err, data);
+    });
+  }; 
+
