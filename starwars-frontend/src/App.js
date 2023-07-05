@@ -16,17 +16,18 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h2>This is a test</h2>
-        <ul>
+        <h1>Star Wars Universe Lookup</h1>
+        <section id="charactersList">
           {characters.map(
             (characters, index) => {
-              return <li key ={index} >
+              return <div key ={index} >
                 {characters.name}
-              </li>
+              </div>
             }
 
           )}
-        </ul>
+
+        </section>
       </header>
     </div>
   );
