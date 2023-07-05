@@ -5,19 +5,23 @@ var app = express();
 app.use(express.json()); //Parse JSON body
 
 // server start-up
-const port = 4000
-console.log("Open a browser to http://localhost:"+port+" to view the application");
-app.listen(port);
+
 
 app.get("/api/planets", (req, res) => {
     dao.findAllPlanets((err, planets) => {
+        console.log(planets)
       if (planets !== undefined) {
         //We have planets
         console.log("index.js all planets: " + planets );
         res.send(planets);
       } else {
         res.statusCode = 501;
+        console.log("Confirmed")
         res.end();
       }
     }); 
   });
+
+const port = 4000
+console.log("Open a browser to http://localhost:"+port+" to view the application");
+app.listen(port);
